@@ -1,0 +1,20 @@
+{
+  "name": "locations",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify index.js -o bundle.js"
+  },
+  "author": "Maria Lobillo Santos",
+  "license": "ISC",
+  "dependencies": {
+    "browserify": "^14.3.0",
+    "browserify-shim": "^3.8.14",
+    "react": "^15.5.4",
+    "reactify": "^1.1.1",
+    "uglify-js": "^3.0.1",
+    "watchify": "^3.9.0"
+  }
+}
