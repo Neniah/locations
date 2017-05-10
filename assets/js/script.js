@@ -164,4 +164,63 @@ $(function(){
       }
     });
   }
+
+  // This function saves a location to favorites and adds it to localStorage
+
+  function saveFavoriteLocation(e){
+
+    e.preventDefault();
+
+    var saveLocation = $('#save-location'),
+      locationAddress = saveLocation.text(),
+      isLocationFavorite = false,
+      locationsArray = JSON.parse(localStorage.getItem('favorite-locations'));
+
+    var location = {
+      lat: saveLocation.attr('data-lat'),
+      lng: saveLocation.attr('data-lng'),
+      createdAt: moment.format()
+    };
+
+    // Checking if this location is in the favorites array
+    if(locationsArray.length){
+      locationsArray.forEach(function(item){
+        if (item.lat == location.lat && item.lng == location.lng){
+          isLocationFavorite = true;
+        }
+      });
+    }
+
+    // If the given location is not in favorites,
+    // add it to the HTML and to locationStorage's array
+
+    if(!isLocationFavorite){
+      favoriteLocationsListGroup.append(
+            '<a class="list-group-item active-location" data-lat="'+location.lat+'" data-lng="'+location.lng+'" data-createdAt="'+location.createdAt+'">'+
+				     locationAddress+'<span class="createdAt">'+moment(location.createdAt).fromNow()+'</span>' +
+				     '<span class="glyphicon glyphicon-menu-right"></span>' +
+				     '</span></a>');
+
+      favoriteLocationsListGroup.show();
+
+      // Adding the given location to the localStorage's array
+      locationsArray.push({
+        address.locationAddress,
+        lat: location.lat,
+        lng: location.lng,
+        createdAt: moment().format()
+      });
+
+      locationStorage.setItem('favorite-locations', JSON.stringify(locationsArray));
+
+      // Make the star icon full, to signify that this location is now favorite
+      favoriteIcon.removeClass('glyphicon-star-empty').addClass('glyphicon-star');
+
+      // Now we have at least one favorite location
+      hasFavoriteLocations = true;
+    }
+  }
+
+
+  
 })
