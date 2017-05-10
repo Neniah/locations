@@ -3,7 +3,7 @@ var React = require('react');
 var Search = require('./Search');
 var Map = require('./Map');
 var CurrentLocation = require('./CurrentLocation');
-var LocationList = require('./LocaitonList');
+var LocationList = require('./LocationList');
 
 var App = React.createClass({
   getInitialState(){
