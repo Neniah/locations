@@ -222,5 +222,50 @@ $(function(){
   }
 
 
-  
-})
+  // This function removes a favorite location from the favorites list
+  // and removes it from localStorage
+
+  function removeFavoriteLocation(e){
+
+    e.preventDefault();
+
+    var saveLocation = $('#save-location'),
+      isLocateionDeleted = false,
+      locationArray = JSON.parse(localStorage.getItem('favorite-locations'));
+
+    var location = {
+      lat: saveLocation.attr('data-lat'),
+      lng: saveLocation.attr('data-lng')
+    };
+
+    // Removing the given location from the localStorage's Array
+    if(locationsArray.length){
+      locationsArray.forEach(function(item, index){
+        if(item.lat == location.lat && item.lng == location.lng){
+          locationsArray.splice(index, 1);
+          isLocationDeleted = true;
+        }
+      });
+    }
+
+    if(isLocationsDeleted){
+      // Remove the given location from the favorites list
+
+      favoriteLocationsListGroup.find('a.list-group-item[data-lat="' + location.lat +'"][data-lng="'+location.lng+'"]').remove();
+
+      localStorage.setItem('favorite-locations', JSON.stringify(locationsArray));
+
+      // Removing the favorite icon from the html
+      favoriteIcon.removeClass('glyphicon-star').addClass('glyphicon-star-empty');
+
+      if(!locationsArray.length){
+        // There are no more favorite locations
+
+        hasFavoriteLocations = false;
+        favoriteLocationsListGroup.hide();
+      } else {
+        hasFavoriteLocations = true;
+      }
+    }
+  }
+});
